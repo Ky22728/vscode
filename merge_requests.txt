@@ -1,0 +1,1763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+<title>GitLab merge requests</title>
+<link href="/gitlab-org/gitlab/-/merge_requests.atom?feed_token=glft-5868a9238db77ecdd59e73b7a6b6e798ad2da30ad5d6c9de3089a7628a771a9a-16982903&amp;label_name%5B%5D=linked-issue&amp;state=opened" rel="self" type="application/atom+xml"/>
+<link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests" rel="alternate" type="text/html"/>
+<id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests</id>
+<updated>2023-09-24T17:12:11Z</updated>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132478</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132478"/>
+  <title>Added styles to to email</title>
+  <updated>2023-09-24T17:12:11Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/8561680/avatar.png"/>
+  <author>
+    <name>Niku Singh</name>
+    <email>soapmactavishmw4@gmail.com</email>
+  </author>
+  <summary>Added styles to to email</summary>
+  <description>## What does this MR do and why?
+
+This MR &amp;quot;Add style to email with subject &amp;quot;Two-factor authentication disabled&amp;quot; as described here https://gitlab.com/gitlab-org/gitlab/-/issues/417027.
+
+This MR makes changes https://gitlab.com/gitlab-org/...</description>
+  <content>## What does this MR do and why?
+
+This MR "Add style to email with subject "Two-factor authentication disabled" as described here https://gitlab.com/gitlab-org/gitlab/-/issues/417027.
+
+This MR makes changes https://gitlab.com/gitlab-org/gitlab/-/blob/a679324a3a668b1548f0b5394e0c2874f6c8cf9f/app/mailers/emails/profile.rb#L73-84 , https://gitlab.com/gitlab-org/gitlab/-/blob/a679324a3a668b1548f0b5394e0c2874f6c8cf9f/app/mailers/emails/profile.rb#L160-168 
+
+by adding `email_with_layout` method Instead of `mail_with_locale`
+
+## Screenshots
+
+| Before | After |
+|--------|-------|
+| ![Screenshot from 2023-07-16 18-49-59.png](/uploads/692a52aa1ffaadd7863281bd4bc3e527/Screenshot_from_2023-07-16_18-49-59.png) | ![Screenshot from 2023-07-16 19-19-27.png](/uploads/e061538421e3afb21dd9073991b29eb1/Screenshot_from_2023-07-16_19-19-27.png) |
+| ![Screenshot from 2023-07-16 19-12-17.png](/uploads/040c62fbe9489a58b40d70388822942f/Screenshot_from_2023-07-16_19-12-17.png) | ![Screenshot from 2023-07-16 20-01-56.png](/uploads/adcca4ca165c2fc3004064d7db93b30b/Screenshot_from_2023-07-16_20-01-56.png) |</content>
+  <labels>
+    <label>Community contribution</label>
+    <label>linked-issue</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Niku Singh</name>
+      <email>soapmactavishmw4@gmail.com</email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Niku Singh</name>
+    <email>soapmactavishmw4@gmail.com</email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132475</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132475"/>
+  <title>Add push option to select target project for MR</title>
+  <updated>2023-09-24T10:31:39Z</updated>
+  <media:thumbnail width="40" height="40" url="https://secure.gravatar.com/avatar/22b9200af3905db580df45b46d072ea9?s=80&amp;d=identicon"/>
+  <author>
+    <name>Chris Lindee</name>
+    <email></email>
+  </author>
+  <summary>Add push option to select target project for MR</summary>
+  <description>## What does this MR do and why?
+
+This merge request addresses https://gitlab.com/gitlab-org/gitlab/-/issues/342985 by adding the `merge_request.target_project` [push option](https://docs.gitlab.com/ee/user/project/push_options.html#push...</description>
+  <content>## What does this MR do and why?
+
+This merge request addresses https://gitlab.com/gitlab-org/gitlab/-/issues/342985 by adding the `merge_request.target_project` [push option](https://docs.gitlab.com/ee/user/project/push_options.html#push-options-for-merge-requests) so users can select the target project when creating a merge request, all with the vanilla Git client.
+
+## Screenshots or screen recordings
+
+_None provided_
+
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+
+| Before | After  |
+| ------ | ------ |
+|        |        |
+
+--&gt;
+## How to set up and validate locally
+
+1. Create project; we'll call this the _base_ project.
+1. Fork base project into what we'll call the _intermediate_ project.
+1. Fork intermediate project into what we'll call the _leaf_ project.
+1. Clone the leaf project (as "origin") onto a system with `git clone`.
+1. Checkout a new branch and commit changes to it.
+1. Run `git push -f -o merge_request.create origin HEAD`; notice how the created MR is to the intermediate project.
+1. Run `git commit --amend --no-edit` so the next push will actually occur (make sure at least 1 second has occurred since last commit).
+1. Run `git push -f -o merge_request.create -o merge_request.target_project=&lt;gitlab-path/to/base-project&gt; origin HEAD`; notice how the MR is to the base project.
+1. Run `git commit --amend --no-edit`.
+1. Run `git push -f -o merge_request.create -o merge_request.target_project=DOES-NOT-EXIST origin HEAD`; notice error.
+1. Run `git commit --amend --no-edit`.
+1. Run `git push -f -o merge_request.create -o merge_request.target_project=&lt;unrelated-project&gt; origin HEAD`; notice error.
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <labels>
+    <label>1st contribution</label>
+    <label>Community contribution</label>
+    <label>linked-issue</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Chris Lindee</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Chris Lindee</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132331</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132331"/>
+  <title>Fix `wiki_front_matter` edit content bug</title>
+  <updated>2023-09-21T11:08:02Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/9523283/avatar.png"/>
+  <author>
+    <name>Linjie Zhang</name>
+    <email></email>
+  </author>
+  <summary>Fix `wiki_front_matter` edit content bug</summary>
+  <description>## What does this MR do and why?
+
+fix ff `wiki_front_matter` edit content bug
+
+this ff will be used in implementation about https://gitlab.com/gitlab-org/gitlab/-/issues/30758#note_1054544532
+
+related issue/MR: 
+
+* https://gitlab.com/git...</description>
+  <content>## What does this MR do and why?
+
+fix ff `wiki_front_matter` edit content bug
+
+this ff will be used in implementation about https://gitlab.com/gitlab-org/gitlab/-/issues/30758#note_1054544532
+
+related issue/MR: 
+
+* https://gitlab.com/gitlab-org/gitlab/-/issues/359081 
+* https://gitlab.com/gitlab-org/gitlab/-/merge_requests/27706
+* https://gitlab.com/gitlab-org/gitlab/-/merge_requests/81833
+* https://gitlab.com/gitlab-org/gitlab/-/merge_requests/92104
+
+
+## Screenshots or screen recordings
+
+_Screenshots are required for UI changes, and strongly recommended for all other merge requests._
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+--&gt;
+
+| Before | After  |
+| ------ | ------ |
+|        |        |
+
+## How to set up and validate locally
+
+### Steps to reproduce
+
+1. enable ff `wiki_front_matter`
+1. open edit form for any wiki page
+1. add Front Matter
+1. save - it is saved correctly
+1. open edit of that same page again
+1. observe that the Front Matter is visible 
+1. save - it is saved correctly
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <milestone>Backlog</milestone>
+  <labels>
+    <label>Category:Content Editor</label>
+    <label>Category:Wiki</label>
+    <label>Community contribution</label>
+    <label>Content Editor</label>
+    <label>Content Editor::Post GA</label>
+    <label>JiHu contribution</label>
+    <label>[deprecated] Accepting merge requests</label>
+    <label>customer</label>
+    <label>devops::plan</label>
+    <label>group::knowledge</label>
+    <label>linked-issue</label>
+    <label>priority::3</label>
+    <label>section::dev</label>
+    <label>severity::3</label>
+    <label>type::bug</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Linjie Zhang</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Linjie Zhang</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132279</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/132279"/>
+  <title>Draft: refactor: Validate package_name_pattern format in protection rule</title>
+  <updated>2023-09-21T15:52:41Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/4375199/avatar.png"/>
+  <author>
+    <name>Gerardo Navarro</name>
+    <email>gerardo@b310.de</email>
+  </author>
+  <summary>Draft: refactor: Validate package_name_pattern format in protection rule</summary>
+  <description>## What does this MR do and why?
+
+&amp;lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keeping the descript...</description>
+  <content>## What does this MR do and why?
+
+&lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keeping the description updated is
+especially important if they didn't participate in the discussion.
+--&gt;
+
+refactor: Validate package_name_pattern format in protection rule
+
+This MR validates the format of the field `package_name_pattern` in
+the package protection rule.
+
+During a MR review, we noticed that npm packages only allow a certain
+format for the package name, e.g. no backslashes characters,
+no asterisk characters, etc.
+
+When implementing package protection rule
+for npm packages, the field `package_name_pattern` should also consider
+this format validation. This MR wants to add this format validation.
+
+Changelog: changed
+
+## Screenshots or screen recordings
+
+_Screenshots are required for UI changes, and strongly recommended for all other merge requests._
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+--&gt;
+
+| Before | After  |
+| ------ | ------ |
+|        |        |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;
+
+Related to #416382</content>
+  <milestone>16.5</milestone>
+  <labels>
+    <label>Community contribution</label>
+    <label>Leading Organization</label>
+    <label>backend</label>
+    <label>devops::package</label>
+    <label>group::package registry</label>
+    <label>linked-issue</label>
+    <label>maintenance::refactor</label>
+    <label>section::ci</label>
+    <label>type::maintenance</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Gerardo Navarro</name>
+      <email>gerardo@b310.de</email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Gerardo Navarro</name>
+    <email>gerardo@b310.de</email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131962</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131962"/>
+  <title>Truncate time in environments page</title>
+  <updated>2023-09-23T11:21:17Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/14208465/avatar.png"/>
+  <author>
+    <name>Anant Verma</name>
+    <email></email>
+  </author>
+  <summary>Truncate time in environments page</summary>
+  <description>## What does this MR do and why?
+
+Truncate time in environments page
+
+Fixes https://gitlab.com/gitlab-org/gitlab/-/issues/420983 following the implementation guide provided.
+
+Changelog: changed
+
+## Screenshots or screen recordings
+
+_Scre...</description>
+  <content>## What does this MR do and why?
+
+Truncate time in environments page
+
+Fixes https://gitlab.com/gitlab-org/gitlab/-/issues/420983 following the implementation guide provided.
+
+Changelog: changed
+
+## Screenshots or screen recordings
+
+_Screenshots are required for UI changes, and strongly recommended for all other merge requests._
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+--&gt;
+
+| Before | After  |
+| ------ | ------ |
+|  ![before_V2](/uploads/3d8ba2a8df616b6bec92a1ca65136ae3/before_V2.png)   | ![after_v2](/uploads/a4c13b22b9788cff074be86101c56091/after_v2.png)       |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [x] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <labels>
+    <label>1st contribution</label>
+    <label>Community contribution</label>
+    <label>UX</label>
+    <label>devops::deploy</label>
+    <label>feature::enhancement</label>
+    <label>group::environments</label>
+    <label>linked-issue</label>
+    <label>section::cd</label>
+    <label>type::feature</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Anant Verma</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Anant Verma</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131637</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131637"/>
+  <title>Draft: Add ability to disable private profiles</title>
+  <updated>2023-09-23T10:00:30Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/15216339/avatar.png"/>
+  <author>
+    <name>Imanpal Singh</name>
+    <email></email>
+  </author>
+  <summary>Draft: Add ability to disable private profiles</summary>
+  <description>## What does this MR do and why?
+
+https://gitlab.com/gitlab-org/gitlab/-/issues/421310
+
+TODO
+ 
+* [x] Add new application setting `make_profile_private`
+* [x] When `make_profile_private` disable field to make profile private
+* [x] When `m...</description>
+  <content>## What does this MR do and why?
+
+https://gitlab.com/gitlab-org/gitlab/-/issues/421310
+
+TODO
+ 
+* [x] Add new application setting `make_profile_private`
+* [x] When `make_profile_private` disable field to make profile private
+* [x] When `make_profile_private` is checked, disable and uncheck field `user_defaults_to_private_profile`
+* [x] when `make_profile_private` is checked, make all profiles public
+* [x] UI update on `make_profile_private` check/uncheck
+* [x] Move user restrictions in application setting from rails view to vue component
+* [x] Move `make_profile_private` to an enterprise feature
+* [x] Update docs
+* [ ] Refactor
+* [ ] Add specs
+* [ ] Translations?
+
+
+&lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keeping the description updated is
+especially important if they didn't participate in the discussion.
+--&gt;
+
+## Screenshots or screen recordings
+
+_Screenshots are required for UI changes, and strongly recommended for all other merge requests._
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+--&gt;
+
+| Before | After  |
+| ------ | ------ |
+|        |        |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <labels>
+    <label>1st contribution</label>
+    <label>Community contribution</label>
+    <label>devops::data stores</label>
+    <label>group::tenant scale</label>
+    <label>linked-issue</label>
+    <label>section::enablement</label>
+    <label>type::feature</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Imanpal Singh</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Imanpal Singh</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131412</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131412"/>
+  <title>Replace different_project? method with instance variable</title>
+  <updated>2023-09-21T15:36:43Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/907418/avatar.png"/>
+  <author>
+    <name>Anatoli Babenia</name>
+    <email>anatoli@rainforce.org</email>
+  </author>
+  <summary>Replace different_project? method with instance variable</summary>
+  <description>## What does this MR do and why?
+
+While reading the code to solve #424579 I found that `different_project?` method can only be called after `create_commit` method, which sets necessary instance variables being checked. The MR removes tha...</description>
+  <content>## What does this MR do and why?
+
+While reading the code to solve #424579 I found that `different_project?` method can only be called after `create_commit` method, which sets necessary instance variables being checked. The MR removes that level of indirection by letting `create_commit` set `@different_project` field explicitly.
+
+This will also help to replace concern with composition in future (https://gitlab.com/gitlab-org/gitlab/-/issues/16270), where `create_commit` could return an error object with all necessary fields to render, instead of injecting the fields into including class.
+
+## How to set up and validate locally
+
+https://gitlab.com/gitlab-org/gitlab/-/issues/424579#steps-to-reproduce
+
+&lt;!--
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>Community contribution</label>
+    <label>Leading Organization</label>
+    <label>backend</label>
+    <label>devops::create</label>
+    <label>group::code review</label>
+    <label>linked-issue</label>
+    <label>maintenance::refactor</label>
+    <label>pipeline:mr-approved</label>
+    <label>section::dev</label>
+    <label>type::maintenance</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Anatoli Babenia</name>
+      <email>anatoli@rainforce.org</email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Anatoli Babenia</name>
+    <email>anatoli@rainforce.org</email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131298</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131298"/>
+  <title>Protected packages: Adding new scope for_package_name</title>
+  <updated>2023-09-21T09:10:28Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/4375199/avatar.png"/>
+  <author>
+    <name>Gerardo Navarro</name>
+    <email>gerardo@b310.de</email>
+  </author>
+  <summary>Protected packages: Adding new scope for_package_name</summary>
+  <description>## What does this MR do and why?
+
+- This MR adds the following scopes to the model `Packages::Protection::Rule`:
+  - `.for_package_name` =&amp;gt; the scope filters `Packages::Protection::Rule` for a given package name (with optional wildcard c...</description>
+  <content>## What does this MR do and why?
+
+- This MR adds the following scopes to the model `Packages::Protection::Rule`:
+  - `.for_package_name` =&gt; the scope filters `Packages::Protection::Rule` for a given package name (with optional wildcard characters)
+  - `.for_oackage_type` =&gt; the scope filters protection rules based on a given package type
+  - `.push_protection_applicable_for_access_level` =&gt; filter the protection rules based on a given access level
+  - `.protected_against_push` =&gt; combination of the three scopes as a utility
+- Additionally, [the method `push_protected_from?(user)` in `Packages::Package`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/131298/diffs#799edff5d5270513a1257fc26c6baaf7e2d53cb7_408_408) constructs the complete DB query to check if a package protection rule for this package and user exists
+- Note: These scopes are needed for the implementation of the feature `protected packages`, see https://gitlab.com/groups/gitlab-org/-/epics/5574
+- The implementation was already [discussed in a previous MR](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/124776#note_1521109417). This MR intends to isolate the implemenation and other discussions related to this necessary scope.
+
+:tools: with :heart: at Siemens
+
+## Implementation thoughts
+
+We want package protection rules to allow wildcard character (`*`) as used in [the feature protected branches](https://docs.gitlab.com/ee/user/project/protected_branches.html#protect-multiple-branches-with-wildcard-rules). This needs to be considered for the implementation of this scope.
+
+As discussed in [a previous MR](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/124776#note_1521109417) and [the initial concept](https://gitlab.com/groups/gitlab-org/-/epics/5574#note_1425176209), @10io sees the possibility and the need for performing the evaluation of the packages protection rules in the database in order to have an efficient way of evaluating different package protection rules at once.
+
+In terms of implementation, [@10io proposes to use the psql operator `ILIKE`](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/124776#note_1546621819) to perform the evaluation in the database. As the the field `package_name_pattern` accepts wildcard characters (only `*`), the value of `package_name_pattern` has to be preprocessed before being applied to the `ILIKE` query, e.g. convert the character `*` to `%`. For this preprocessing, [@10io also proposes to introduce a new column](https://gitlab.com/gitlab-org/gitlab/-/merge_requests/124776#note_1546621819 ) that contains the preprocessed value for `package_name_pattern` that can be easioly applied to the `ILIKE` query.
+
+This MR is intended to finalize the discussion and the implementation on this matter.
+
+## DB Query changes
+
+### Old query
+
+### New query
+
+The following queries are used to find and evaluate the package protection rules for a given package, e.g. `package.push_protected_from?(project_owner)`
+
+``ProjectAuthorization Maximum (0.9ms)  SELECT MAX("project_authorizations"."access_level") AS "maximum_access_level", "project_authorizations"."project_id" AS "project_authorizations_project_id" FROM "project_authorizations" WHERE "project_authorizations"."user_id" = 1 AND "project_authorizations"."project_id" = 7 GROUP BY "project_authorizations"."project_id" /*application:console,db_config_name:main,console_hostname:Gerardos-MacBook-Pro.local,console_username:client-siemens,line:/app/models/user.rb:2038:in `block in max_member_access_for_project_ids'*/``
+
+``Packages::Protection::Rule Exists? (0.4ms)  SELECT 1 AS one FROM "packages_protection_rules" WHERE "packages_protection_rules"."project_id" = 7 AND ('@gitlab-org/npm-package-1' ILIKE package_name_pattern_ilike_query) AND "packages_protection_rules"."package_type" = 2 AND "packages_protection_rules"."push_protected_up_to_access_level" &gt;= 50 LIMIT 1 /*application:console,db_config_name:main,console_hostname:Gerardos-MacBook-Pro.local,console_username:client-siemens,line:/app/models/packages/package.rb:416:in `push_protected_from?'*/``
+
+## Screenshots or screen recordings
+
+- There are no specific ~frontend changes in this MR =&gt; it focusses only on ~backend
+
+## How to set up and validate locally
+
+1. Create one `Packages::Protection::Rule`
+```ruby
+Packages::Protection::Rule.create(project: Project.find(7), package_type: :npm, push_protected_up_to_access_level: Gitlab::Access::DEVELOPER, package_name_pattern: "@gitlab-org/npm-package-*")
+```
+
+2. Build a package object and check if a package protection rule exists for a project developer
+```ruby
+package = Project.find(7).packages.with_package_type(:npm).with_name("@gitlab-org/npm-package-1").build()
+project_developer = Project.find(7).team.developers.first
+package.push_protected_from?(project_developer)
+# =&gt; Returns true because developers are not allowed to push based on the created protection rule, see step 1.
+```
+
+3. Build a package object and check if a package protection rule exists for a project owner (SQL query displayed above)
+```ruby
+package = Project.find(7).packages.with_package_type(:npm).with_name("@gitlab-org/npm-package-1").build()
+project_owner = Project.find(7).team.owners.first
+package.push_protected_from?(project_owner)
+# =&gt; Returns false because owners are still allowed to push because there is no protection rule, see step 1.
+```
+
+## Todos
+
+- [x] Finalize discussion on this implementation
+- [x] Implement the approach proposed by @10io, see (https://gitlab.com/gitlab-org/gitlab/-/merge_requests/124776#note_1546621819)
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+- [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+  - [x] [Changelog entry](https://docs.gitlab.com/ee/development/changelog.html) added, if necessary
+  - [ ] [Documentation created/updated](https://docs.gitlab.com/ee/development/documentation/feature-change-workflow.html) via this MR
+  - [ ] Documentation reviewed by technical writer *or* follow-up review issue [created](https://gitlab.com/gitlab-org/gitlab-ee/issues/new?issuable_template=Doc%20Review)
+  - [x] [Tests added for this feature/bug](https://docs.gitlab.com/ee/development/testing_guide/index.html)
+  - [~] Tested in [all supported browsers](https://docs.gitlab.com/ee/install/requirements.html#supported-web-browsers)
+  - [x] Conforms to the [code review guidelines](https://docs.gitlab.com/ee/development/code_review.html)
+  - [x] Conforms to the [merge request performance guidelines](https://docs.gitlab.com/ee/development/merge_request_performance_guidelines.html)
+  - [x] Conforms to the [style guides](https://gitlab.com/gitlab-org/gitlab-ee/blob/master/CONTRIBUTING.md#style-guides)
+  - [~] Conforms to the [javascript style guides](https://gitlab.com/gitlab-org/gitlab/-/blob/master/doc/development/fe_guide/style/javascript.md)
+  - [x] Conforms to the [database guides](https://docs.gitlab.com/ee/development/README.html#databases-guides)
+
+Related to #416382</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>Community contribution</label>
+    <label>Leading Organization</label>
+    <label>devops::package</label>
+    <label>group::package registry</label>
+    <label>linked-issue</label>
+    <label>section::ci</label>
+    <label>type::feature</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Gerardo Navarro</name>
+      <email>gerardo@b310.de</email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Gerardo Navarro</name>
+    <email>gerardo@b310.de</email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130981</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130981"/>
+  <title>Draft: post a status with a ref with that is the same as a tag/branch</title>
+  <updated>2023-09-13T12:08:35Z</updated>
+  <media:thumbnail width="40" height="40" url="https://secure.gravatar.com/avatar/1be7308777f442c7ef367f1d6662c09b?s=80&amp;d=identicon"/>
+  <author>
+    <name>Raymond B</name>
+    <email></email>
+  </author>
+  <summary>Draft: post a status with a ref with that is the same as a tag/branch</summary>
+  <description>## What does this MR do and why?
+
+closes #421977
+
+&amp;lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keep...</description>
+  <content>## What does this MR do and why?
+
+closes #421977
+
+&lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keeping the description updated is
+especially important if they didn't participate in the discussion.
+--&gt;
+
+## Screenshots or screen recordings
+
+_Screenshots are required for UI changes, and strongly recommended for all other merge requests._
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+--&gt;
+
+| Before | After  |
+| ------ | ------ |
+|        |        |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>1st contribution</label>
+    <label>Category:Pipeline Composition</label>
+    <label>Community contribution</label>
+    <label>automation:ml</label>
+    <label>automation:self-triage-encouraged</label>
+    <label>backend</label>
+    <label>bug::functional</label>
+    <label>devops::verify</label>
+    <label>group::pipeline authoring</label>
+    <label>linked-issue</label>
+    <label>section::ci</label>
+    <label>severity::3</label>
+    <label>type::bug</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Raymond B</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Raymond B</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130789</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130789"/>
+  <title>Add a user preference to show times in 24h format</title>
+  <updated>2023-09-22T18:58:40Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/1982521/avatar.png"/>
+  <author>
+    <name>Thorben Westerhuys</name>
+    <email>thorben@cividi.ch</email>
+  </author>
+  <summary>Add a user preference to show times in 24h format</summary>
+  <description>## What does this MR do and why?
+
+Add a user preference to switch time formatting to be in 24-hour/iso time format. This MR is based on #15206.
+
+## Screenshots or screen recordings
+
+| Before (or with setting disabled) | After (with setti...</description>
+  <content>## What does this MR do and why?
+
+Add a user preference to switch time formatting to be in 24-hour/iso time format. This MR is based on #15206.
+
+## Screenshots or screen recordings
+
+| Before (or with setting disabled) | After (with setting enabled)  |
+| ------ | ------ |
+| ![Screenshot_2023-09-02_at_19.53.46](/uploads/ce0c67e3a70cd97bb0dc347bd50e87f5/Screenshot_2023-09-02_at_19.53.46.png) | ![Screenshot_2023-09-05_at_08.18.02](/uploads/55b174543da05dc59171ecdbeb6f24ee/Screenshot_2023-09-05_at_08.18.02.png) |
+| ![Screenshot_2023-09-02_at_20.17.35](/uploads/0f89fcbda43927b993497804364dc2ff/Screenshot_2023-09-02_at_20.17.35.png) | ![Screenshot_2023-09-02_at_20.17.54](/uploads/14f6dd42fdeeac43912acb0ae18638ac/Screenshot_2023-09-02_at_20.17.54.png) |
+| ![Screenshot_2023-09-04_at_22.00.49](/uploads/f507ee99ec515c18ddcb5d4426f483fc/Screenshot_2023-09-04_at_22.00.49.png) | ![Screenshot_2023-09-04_at_22.00.05](/uploads/b64e6e9b463f6a3337a4a5c6d546cdd9/Screenshot_2023-09-04_at_22.00.05.png) |
+| ![Screenshot_2023-09-04_at_22.03.15](/uploads/52c11d750b3bf2a695ff7112ff840a09/Screenshot_2023-09-04_at_22.03.15.png) | ![Screenshot_2023-09-04_at_22.03.31](/uploads/803ff196e1177ea6abd939b77551b12d/Screenshot_2023-09-04_at_22.03.31.png) |
+
+## How to set up and validate locally
+
+1. Visit user preferences `http://127.0.0.1:3000/-/profile/preferences`
+1. Activate `Show 24-hour format instead of 12-hour` and deactivate `Use relative times`
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [x] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;
+
+Related to #15206</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>Category:Internationalization</label>
+    <label>Community contribution</label>
+    <label>Data Warehouse::Not Impacted</label>
+    <label>Hackathon</label>
+    <label>Hacktoberfest</label>
+    <label>Support Interest</label>
+    <label>Technical Writing</label>
+    <label>UI text</label>
+    <label>UX</label>
+    <label>UX FY21-Q4</label>
+    <label>auto updated</label>
+    <label>awaiting feedback</label>
+    <label>backend</label>
+    <label>customer</label>
+    <label>database</label>
+    <label>database-testing-automation</label>
+    <label>database::approved</label>
+    <label>devops::manage</label>
+    <label>documentation</label>
+    <label>feature::enhancement</label>
+    <label>frontend</label>
+    <label>group::import and integrate</label>
+    <label>linked-issue</label>
+    <label>pipeline:mr-approved</label>
+    <label>pipeline:run-as-if-jh</label>
+    <label>popular proposal</label>
+    <label>potential proposal</label>
+    <label>section::dev</label>
+    <label>settings</label>
+    <label>type::feature</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Thorben Westerhuys</name>
+      <email>thorben@cividi.ch</email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Thorben Westerhuys</name>
+    <email>thorben@cividi.ch</email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130691</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130691"/>
+  <title>Draft: Rename diagrams.net integration to draw.io</title>
+  <updated>2023-09-20T00:06:33Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/5332/avatar.png"/>
+  <author>
+    <name>Ben Bodenmiller</name>
+    <email></email>
+  </author>
+  <summary>Draft: Rename diagrams.net integration to draw.io</summary>
+  <description>todo:
+- review https://gitlab.com/gitlab-org/gitlab/-/merge_requests/116281/diffs &amp;amp; address
+
+## What does this MR do and why?
+
+Implement https://gitlab.com/gitlab-org/gitlab/-/issues/423349
+
+&amp;lt;!--
+Describe in detail what your merge reques...</description>
+  <content>todo:
+- review https://gitlab.com/gitlab-org/gitlab/-/merge_requests/116281/diffs &amp; address
+
+## What does this MR do and why?
+
+Implement https://gitlab.com/gitlab-org/gitlab/-/issues/423349
+
+&lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keeping the description updated is
+especially important if they didn't participate in the discussion.
+--&gt;
+
+## Screenshots or screen recordings
+
+_Screenshots are required for UI changes, and strongly recommended for all other merge requests._
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+--&gt;
+
+| Before | After  |
+| ------ | ------ |
+|        |        |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>Community contribution</label>
+    <label>Leading Organization</label>
+    <label>automation:author-reminded</label>
+    <label>devops::plan</label>
+    <label>frontend</label>
+    <label>group::knowledge</label>
+    <label>linked-issue</label>
+    <label>maintenance::refactor</label>
+    <label>section::dev</label>
+    <label>type::maintenance</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Ben Bodenmiller</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Ben Bodenmiller</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130449</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130449"/>
+  <title>Abstract CRUD services for pipeline trigger tokens</title>
+  <updated>2023-09-18T03:20:37Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/8659557/avatar.png"/>
+  <author>
+    <name>Missy Davies</name>
+    <email></email>
+  </author>
+  <summary>Abstract CRUD services for pipeline trigger tokens</summary>
+  <description>## What does this MR do and why?
+
+Resolves https://gitlab.com/gitlab-org/gitlab/-/issues/421383, working off of https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128838/diffs#4556747b395ad4bad0a6feb4686f2a28186c736e as inspiration
+
+T...</description>
+  <content>## What does this MR do and why?
+
+Resolves https://gitlab.com/gitlab-org/gitlab/-/issues/421383, working off of https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128838/diffs#4556747b395ad4bad0a6feb4686f2a28186c736e as inspiration
+
+This MR adds centralized service classes for pipeline trigger token CRUD in order to standardize behavior and reduce inconsistencies across different endpoints (GraphQL, REST, UI).
+
+## How to set up and validate locally
+#### GraphQL
+1. Run gdk/gitpod server
+2. Navigate to `http://127.0.0.1:3000/-/graphql-explorer`
+3. Run CRUD mutations and verify the trigger token is properly mutated
+```
+# create
+mutation {
+  pipelineTriggerCreate(
+    input: {projectPath: "toolbox/gitlab-smoke-tests", description:"A description"}
+  ) {
+    pipelineTrigger {
+      id
+      description
+      lastUsed
+      owner {
+        id
+      }
+      hasTokenExposed
+      token
+      canAccessProject 
+    }
+    errors
+  }
+}
+
+# update
+mutation {
+  pipelineTriggerUpdate(
+    input: {id: "gid://gitlab/Ci::Trigger/52", description: "A great new description!" }
+  ) {
+    pipelineTrigger {
+      id
+      description
+    }
+    errors
+  }
+}
+
+# delete
+mutation {
+  pipelineTriggerDelete(
+    input: {id: "gid://gitlab/Ci::Trigger/51"}
+  ) {
+    errors
+  }
+}
+```
+
+#### REST 
+1. Open your favorite api testing service, I used [Postman](https://www.postman.com/)
+2. Run CRUD endpoints and verify the trigger token is properly mutated
+```
+# Create -&gt; POST 
+http://127.0.0.1:3000/api/v4/projects/3/triggers?description="My new trigger"
+
+# Update -&gt; PUT
+http://127.0.0.1:3000/api/v4/projects/3/triggers/52/?description="An updated description"
+
+# Delete -&gt; DELETE
+http://127.0.0.1:3000/api/v4/projects/3/triggers/50
+```
+
+#### UI
+1. Run gdk/gitpod server
+2. Navigate to a Project &gt; Settings &gt; CI/CD
+3. Click to expand the section on `Pipeline Triggers` 
+4. CRUD triggers using the UI, ensure functionality works as expected
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [x] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>Community contribution</label>
+    <label>Leading Organization</label>
+    <label>automation:reviewers-reminded</label>
+    <label>backend</label>
+    <label>devops::verify</label>
+    <label>group::pipeline execution</label>
+    <label>linked-issue</label>
+    <label>maintenance::refactor</label>
+    <label>pipeline:mr-approved</label>
+    <label>section::ci</label>
+    <label>type::maintenance</label>
+    <label>verify-review::impacted</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Missy Davies</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Missy Davies</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130112</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/130112"/>
+  <title>Refactor Gitlab::Regex::BulkImports module</title>
+  <updated>2023-09-07T13:44:28Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/6651670/avatar.png"/>
+  <author>
+    <name>Justin Zeng</name>
+    <email></email>
+  </author>
+  <summary>Refactor Gitlab::Regex::BulkImports module</summary>
+  <description>## What does this MR do and why?
+* [x] Remove the `bulk_import_` prefix from the 4 methods in `Gitlab::Regex::BulkImports`, making sure there&amp;#39;s no name conflicts between them and the methods in `Gitlab::Regex`
+* [x] Replace `Gitlab::Rege...</description>
+  <content>## What does this MR do and why?
+* [x] Remove the `bulk_import_` prefix from the 4 methods in `Gitlab::Regex::BulkImports`, making sure there's no name conflicts between them and the methods in `Gitlab::Regex`
+* [x] Replace `Gitlab::Regex.bulk_import_*` with `Gitlab::Regex::BulkImports.*` across the codebase
+* [x] Update [the tests](https://gitlab.com/gitlab-org/gitlab/-/blob/8e6324a8fa860362a31c43a1f9e134263b6fea93/spec/lib/gitlab/regex_spec.rb) and fix any errors that come from the renaming
+* [x] Moved the tests related to bulk imports from `spec/lib/gitlab/regex_spec.rb` into its own separate spec file (spec/lib/gitlab/regex/bulk_imports_spec.rb)
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [x] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;
+
+Related to #419767</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>Community contribution</label>
+    <label>automation:reviewers-reminded</label>
+    <label>backend</label>
+    <label>devops::manage</label>
+    <label>group::import and integrate</label>
+    <label>linked-issue</label>
+    <label>maintenance::refactor</label>
+    <label>section::dev</label>
+    <label>type::maintenance</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Justin Zeng</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Justin Zeng</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129964</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129964"/>
+  <title>Allow personal access tokens to be rotated when &amp;quot;Maximum allowable lifetime f...</title>
+  <updated>2023-09-21T17:21:06Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/15520738/avatar.png"/>
+  <author>
+    <name>Zachary Bridges</name>
+    <email></email>
+  </author>
+  <summary>Allow personal access tokens to be rotated when "Maximum allowable lifetime for access tokens (days)" field is set to less than one week</summary>
+  <description>## What does this MR do and why?
+
+addresses #422928. allows personal access tokens to be rotated when `ApplicationSettings#max_personal_access_token_lifetime` is set to less than one week. Previously this would fail when the lifetime was...</description>
+  <content>## What does this MR do and why?
+
+addresses #422928. allows personal access tokens to be rotated when `ApplicationSettings#max_personal_access_token_lifetime` is set to less than one week. Previously this would fail when the lifetime was set to less than one week, because the expiration date was set too far into the future. This establishes a new behavior where the ApplicationSettings#max_personal_access_token_lifetime configuration sets the new maximum default lifetime for token rotation, but only in the case where the value is set to under 7 days. 
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [x] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+Related to #422928</content>
+  <milestone>16.5</milestone>
+  <labels>
+    <label>1st contribution</label>
+    <label>Community contribution</label>
+    <label>backend</label>
+    <label>bug::functional</label>
+    <label>devops::govern</label>
+    <label>group::authentication and authorization</label>
+    <label>linked-issue</label>
+    <label>pipeline:mr-approved</label>
+    <label>section::sec</label>
+    <label>type::bug</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Zachary Bridges</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Zachary Bridges</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129928</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129928"/>
+  <title>Notification email for newly authorized and created OAuth applications</title>
+  <updated>2023-09-22T01:30:34Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/1277797/avatar.png"/>
+  <author>
+    <name>nobody</name>
+    <email></email>
+  </author>
+  <summary>Notification email for newly authorized and created OAuth applications</summary>
+  <description>## What does this MR do and why?
+
+To try to close #414375 &amp;amp; send email when a user create a new application.
+
+This MR does two things:
+
+1. send an notification email when a user create a new application. This application can be with thre...</description>
+  <content>## What does this MR do and why?
+
+To try to close #414375 &amp; send email when a user create a new application.
+
+This MR does two things:
+
+1. send an notification email when a user create a new application. This application can be with three level: [User owned application](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-a-user-owned-application), [Group owned application](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-a-group-owned-application), or [Instance-wide application](https://docs.gitlab.com/ee/integration/oauth_provider.html#create-an-instance-wide-application)
+2. send an notification email to the user when they authorized an existing application. This is issue #414375
+
+## How to set up and validate locally
+
+### Review mail through mail preivew \[1\]
+
+#### review notification email when a user create a new application
+
+`http://127.0.0.1:3000/rails/mailers/notify/application_created_email`
+
+#### review notification email when a user authorized an existing application
+
+`http://127.0.0.1:3000/rails/mailers/notify/application_authorized_email`
+
+\[1\]. https://docs.gitlab.com/ee/development/emails.html#mailer-previews
+
+### Test when a new application is created
+
+#### create a User owned application
+
+1. create a new application.
+2. go to [http://localhost:3000/rails/letter_opener/](http://localhost:3000/rails/letter_opener/)
+3. there should be a new email!
+
+![Screenshot 2023-09-05 at 9.48.46 pm.png](/uploads/dd898ae15bcdedc99e71476de46ac244/Screenshot_2023-09-05_at_9.48.46_pm.png)
+
+#### create a group owned application
+
+1. create a new group, and create a new group application at `http://127.0.0.1:3000/groups/&lt;new group&gt;/-/settings/applications`
+2. go to [http://localhost:3000/rails/letter_opener/](http://localhost:3000/rails/letter_opener/)
+3. there should be a new email
+
+#### create an Instance-wide application
+
+1. go to admin page, and find admin application settings at here: `http://127.0.0.1:3000/admin/applications`.
+2. create a new instance application
+3. go to [http://localhost:3000/rails/letter_opener/](http://localhost:3000/rails/letter_opener/)
+4. there should be a new email.
+
+### Test when a user authorized an existing application
+
+I am doing this in a complicated way.. not sure if there is some easier way to check this. The original issue description mentioned that we can use `glab auth login` to test but I found that `glab auth login` might only be used on gitlab.com as its client id is hardcoded \[1\]. There is no way for me to change the client id in the instance application.
+
+[An issue](https://gitlab.com/gitlab-org/cli/-/issues/1338) has been raised to address this, by the time when I was testing, the issue has not been resolved so I am using gitpod to test this instead.
+
+The method below needs a gitpod account.
+
+1. start the instance on gitpod so that there will be an public host name of a test GitLab instance.
+2. create a new admin application when using root account.
+3. find an external service provide (I use gitpod.io). Then add the gitpod instance as the new git interations \[2\].
+4. finishing authentication, then go to `https://gitpod.gitlab.instance/rails/letter_opener`. There should be a letter saying an application is authorized by the root.
+5. In the Git provider section at gitpod integration page, there would be a new provider, and the username is root. Delete that provider.
+6. in GitLab instance, logout root user, and login as a normal user, then go to any project of this user. Add `https://gitpod.io#` in front of the project url.
+7. In the context URL, it should ask to authorize. click okay.
+8. Go to check `https://gitpod.gitlab.instance/-/profile/applications` for the normal, there should be a new authorized application.
+9. Go to check `https://gitpod.gitlab.instance/rails/letter_opener/`. Now there should be a new letter for this normal user. The letter is like below.
+
+![Screenshot_2023-09-05_at_11.42.31_pm](/uploads/5fa71575afca92bd30a499fa4adfd831/Screenshot_2023-09-05_at_11.42.31_pm.png)
+
+\[1\]. https://gitlab.com/gitlab-org/cli/-/blob/main/pkg/oauth2/oauth2.go#L23
+
+\[2\]. https://gitpod.io/user/integrations
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [x] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.</content>
+  <milestone>16.4</milestone>
+  <labels>
+    <label>Community contribution</label>
+    <label>GitLab Free</label>
+    <label>GitLab Premium</label>
+    <label>GitLab Ultimate</label>
+    <label>RTRec::Control</label>
+    <label>Technical Writing</label>
+    <label>UI text</label>
+    <label>devops::govern</label>
+    <label>documentation</label>
+    <label>feature::addition</label>
+    <label>group::authentication and authorization</label>
+    <label>linked-issue</label>
+    <label>oauth</label>
+    <label>pipeline:mr-approved</label>
+    <label>section::sec</label>
+    <label>security</label>
+    <label>type::feature</label>
+    <label>workflow::ready for review</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>nobody</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>nobody</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129576</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129576"/>
+  <title>Omit timeout as default keyword until issue 387528 is fixed</title>
+  <updated>2023-09-13T00:04:28Z</updated>
+  <media:thumbnail width="40" height="40" url="https://secure.gravatar.com/avatar/03364a69004994a9a30e55a5ec677cf2?s=80&amp;d=identicon"/>
+  <author>
+    <name>Matthias Reiff</name>
+    <email></email>
+  </author>
+  <summary>Omit timeout as default keyword until issue 387528 is fixed</summary>
+  <description>## What does this MR do and why?
+Currently `timeout` does not work as default keyword, as can be read in [Issue 387528](https://gitlab.com/gitlab-org/gitlab/-/issues/387528).
+
+Therefore it makes sense to remove it from this docs section,...</description>
+  <content>## What does this MR do and why?
+Currently `timeout` does not work as default keyword, as can be read in [Issue 387528](https://gitlab.com/gitlab-org/gitlab/-/issues/387528).
+
+Therefore it makes sense to remove it from this docs section, as it is very confusing currently. Testing a feature that is claimed to work, just to go into debugging until you find the open issue is unnecessarily time consuming.
+
+When the issue is fixed, this change needs to be reverted.
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [x] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <labels>
+    <label>1st contribution</label>
+    <label>Category:Pipeline Composition</label>
+    <label>Community contribution</label>
+    <label>Technical Writing</label>
+    <label>automation:author-reminded</label>
+    <label>devops::verify</label>
+    <label>docs-only</label>
+    <label>docs::improvement</label>
+    <label>documentation</label>
+    <label>group::pipeline authoring</label>
+    <label>idle</label>
+    <label>linked-issue</label>
+    <label>maintenance::refactor</label>
+    <label>section::ci</label>
+    <label>type::maintenance</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Matthias Reiff</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Matthias Reiff</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129002</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/129002"/>
+  <title>Draft: Syntax highlighting for Glimmer JS/TS (.gts/.gjs) files</title>
+  <updated>2023-08-27T00:05:38Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/3013469/avatar.png"/>
+  <author>
+    <name>Ignace Maes</name>
+    <email></email>
+  </author>
+  <summary>Draft: Syntax highlighting for Glimmer JS/TS (.gts/.gjs) files</summary>
+  <description>## What does this MR do and why?
+
+&amp;lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keeping the descript...</description>
+  <content>## What does this MR do and why?
+
+&lt;!--
+Describe in detail what your merge request does and why.
+
+Please keep this description updated with any discussion that takes place so
+that reviewers can understand your intent. Keeping the description updated is
+especially important if they didn't participate in the discussion.
+--&gt;
+
+## Screenshots or screen recordings
+
+_Screenshots are required for UI changes, and strongly recommended for all other merge requests._
+
+&lt;!--
+Please include any relevant screenshots or screen recordings that will assist
+reviewers and future readers. If you need help visually verifying the change,
+please leave a comment and ping a GitLab reviewer, maintainer, or MR coach.
+--&gt;
+
+| Before | After  |
+| ------ | ------ |
+|        |        |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;
+
+Related to #421133</content>
+  <labels>
+    <label>1st contribution</label>
+    <label>Category:Source Code Management</label>
+    <label>Community contribution</label>
+    <label>automation:author-reminded</label>
+    <label>devops::create</label>
+    <label>feature::enhancement</label>
+    <label>frontend</label>
+    <label>group::source code</label>
+    <label>highlight</label>
+    <label>linked-issue</label>
+    <label>section::dev</label>
+    <label>type::feature</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Ignace Maes</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Ignace Maes</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128867</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128867"/>
+  <title>Export all issues to CSV to object storage Part 3 - Frontend</title>
+  <updated>2023-09-21T00:06:12Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/10702004/avatar.png"/>
+  <author>
+    <name>Zehua Zhang</name>
+    <email></email>
+  </author>
+  <summary>Export all issues to CSV to object storage Part 3 - Frontend</summary>
+  <description>## What does this MR do and why?
+
+Related to issue https://gitlab.com/gitlab-org/gitlab/-/issues/294504
+
+MR Part 1: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863
+
+MR Part 2: https://gitlab.com/gitlab-org/gitlab/-/merge_req...</description>
+  <content>## What does this MR do and why?
+
+Related to issue https://gitlab.com/gitlab-org/gitlab/-/issues/294504
+
+MR Part 1: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863
+
+MR Part 2: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128864
+
+MR Part 3: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128867
+
+1. The size limit of the exported issue file is lifted, and the file is stored in the object storage after export, and the download link will be provided by email.
+2. Added `ProjectIssuesExportJob` to track the progress of issue export.
+3. Added `IssuesExportUpload` to save the issue export record and file path.
+4. Added `ProjectIssuesExportJob.prune_expired_jobs` to `Gitlab::Export::PruneProjectExportJobsWorker` to clean up these entries.
+5. Added API to start/download project issue exports.
+
+@chaomao
+
+## Screenshots or screen recordings
+
+
+| Before | After  |
+| ------ | ------ |
+|    ![image](/uploads/a7bff4f2f0a291d4a607bcbf1b8e3962/image.png)   |   ![image](/uploads/1ec5000d1a74c5970b8ab9ba51b03cdd/image.png)    |
+| ![image](/uploads/55f0b4ba1d5f22613792b8d1c02c238b/image.png) | ![image](/uploads/7d9b534782e5ca3154249488e87cff69/image.png) |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <labels>
+    <label>Category:Team Planning</label>
+    <label>Community contribution</label>
+    <label>JiHu contribution</label>
+    <label>automation:author-reminded</label>
+    <label>backend</label>
+    <label>database</label>
+    <label>devops::plan</label>
+    <label>feature::addition</label>
+    <label>frontend</label>
+    <label>group::project management</label>
+    <label>linked-issue</label>
+    <label>section::dev</label>
+    <label>type::feature</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Zehua Zhang</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Zehua Zhang</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128864</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128864"/>
+  <title>Export all issues to CSV to object storage Part 2 - Backend</title>
+  <updated>2023-09-21T00:06:13Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/10702004/avatar.png"/>
+  <author>
+    <name>Zehua Zhang</name>
+    <email></email>
+  </author>
+  <summary>Export all issues to CSV to object storage Part 2 - Backend</summary>
+  <description>## What does this MR do and why?
+
+Related to issue https://gitlab.com/gitlab-org/gitlab/-/issues/294504
+
+MR Part 1: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863
+
+MR Part 2: https://gitlab.com/gitlab-org/gitlab/-/merge_req...</description>
+  <content>## What does this MR do and why?
+
+Related to issue https://gitlab.com/gitlab-org/gitlab/-/issues/294504
+
+MR Part 1: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863
+
+MR Part 2: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128864
+
+MR Part 3: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128867
+
+1. The size limit of the exported issue file is lifted, and the file is stored in the object storage after export, and the download link will be provided by email.
+2. Added `ProjectIssuesExportJob` to track the progress of issue export.
+3. Added `IssuesExportUpload` to save the issue export record and file path.
+4. Added `ProjectIssuesExportJob.prune_expired_jobs` to `Gitlab::Export::PruneProjectExportJobsWorker` to clean up these entries.
+5. Added API to start/download project issue exports.
+
+@chaomao
+
+## Screenshots or screen recordings
+
+
+| Before | After  |
+| ------ | ------ |
+|    ![image](/uploads/a7bff4f2f0a291d4a607bcbf1b8e3962/image.png)   |   ![image](/uploads/1ec5000d1a74c5970b8ab9ba51b03cdd/image.png)    |
+| ![image](/uploads/55f0b4ba1d5f22613792b8d1c02c238b/image.png) | ![image](/uploads/7d9b534782e5ca3154249488e87cff69/image.png) |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <labels>
+    <label>Community contribution</label>
+    <label>JiHu contribution</label>
+    <label>automation:author-reminded</label>
+    <label>devops::manage</label>
+    <label>feature::addition</label>
+    <label>group::import and integrate</label>
+    <label>linked-issue</label>
+    <label>section::dev</label>
+    <label>type::feature</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Zehua Zhang</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Zehua Zhang</name>
+    <email></email>
+  </assignee>
+</entry>
+<entry>
+  <id>https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863</id>
+  <link href="https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863"/>
+  <title>Export all issues to CSV to object storage Part 1 - Database</title>
+  <updated>2023-09-21T00:06:15Z</updated>
+  <media:thumbnail width="40" height="40" url="https://gitlab.com/uploads/-/system/user/avatar/10702004/avatar.png"/>
+  <author>
+    <name>Zehua Zhang</name>
+    <email></email>
+  </author>
+  <summary>Export all issues to CSV to object storage Part 1 - Database</summary>
+  <description>## What does this MR do and why?
+Related to issue https://gitlab.com/gitlab-org/gitlab/-/issues/294504
+
+MR Part 1: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863
+
+MR Part 2: https://gitlab.com/gitlab-org/gitlab/-/merge_requ...</description>
+  <content>## What does this MR do and why?
+Related to issue https://gitlab.com/gitlab-org/gitlab/-/issues/294504
+
+MR Part 1: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128863
+
+MR Part 2: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128864
+
+MR Part 3: https://gitlab.com/gitlab-org/gitlab/-/merge_requests/128867
+
+1. The size limit of the exported issue file is lifted, and the file is stored in the object storage after export, and the download link will be provided by email.
+2. Added `ProjectIssuesExportJob` to track the progress of issue export.
+3. Added `IssuesExportUpload` to save the issue export record and file path.
+4. Added `ProjectIssuesExportJob.prune_expired_jobs` to `Gitlab::Export::PruneProjectExportJobsWorker` to clean up these entries.
+5. Added API to start/download project issue exports.
+
+@chaomao
+
+## Screenshots or screen recordings
+
+
+| Before | After  |
+| ------ | ------ |
+|    ![image](/uploads/a7bff4f2f0a291d4a607bcbf1b8e3962/image.png)   |   ![image](/uploads/1ec5000d1a74c5970b8ab9ba51b03cdd/image.png)    |
+| ![image](/uploads/55f0b4ba1d5f22613792b8d1c02c238b/image.png) | ![image](/uploads/7d9b534782e5ca3154249488e87cff69/image.png) |
+
+## How to set up and validate locally
+
+_Numbered steps to set up and validate the change are strongly suggested._
+
+&lt;!--
+Example below:
+
+1. In rails console enable the experiment fully
+   ```ruby
+   Feature.enable(:member_areas_of_focus)
+   ```
+1. Visit any group or project member pages such as `http://127.0.0.1:3000/groups/flightjs/-/group_members`
+1. Click the `invite members` button.
+--&gt;
+
+## MR acceptance checklist
+
+This checklist encourages us to confirm any changes have been analyzed to reduce risks in quality, performance, reliability, security, and maintainability.
+
+* [ ] I have evaluated the [MR acceptance checklist](https://docs.gitlab.com/ee/development/code_review.html#acceptance-checklist) for this MR.
+
+&lt;!-- template sourced from https://gitlab.com/gitlab-org/gitlab/-/blob/master/.gitlab/merge_request_templates/Default.md --&gt;</content>
+  <labels>
+    <label>Category:Team Planning</label>
+    <label>Community contribution</label>
+    <label>JiHu contribution</label>
+    <label>automation:author-reminded</label>
+    <label>devops::plan</label>
+    <label>feature::enhancement</label>
+    <label>group::project management</label>
+    <label>linked-issue</label>
+    <label>section::dev</label>
+    <label>type::feature</label>
+    <label>workflow::in dev</label>
+  </labels>
+  <assignees>
+    <assignee>
+      <name>Zehua Zhang</name>
+      <email></email>
+    </assignee>
+  </assignees>
+  <assignee>
+    <name>Zehua Zhang</name>
+    <email></email>
+  </assignee>
+</entry>
+</feed>
